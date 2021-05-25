@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from "ngx-cookie-service";
+import { UsuarioService } from "../../services/usuario.service";
 
 @Component({
   selector: 'app-index',
@@ -7,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndexComponent implements OnInit {
 
-  constructor() { }
+  constructor(private cookie: CookieService, private usuario: UsuarioService) { }
 
   ngOnInit(): void {
+    console.log(this.usuario.getUserLogged)
   }
+
 
 }
