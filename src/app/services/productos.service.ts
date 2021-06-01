@@ -17,7 +17,7 @@ export class ProductosService {
   }
 
   getProductoNombre(nombre: string): Observable<any> {
-    return this.http.get(config.api.url+'/api/productos/' + nombre);
+    return this.http.get(config.api.url+'/api/productos/nombre/' + nombre);
 
   }
   getProductos(){

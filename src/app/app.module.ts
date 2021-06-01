@@ -16,6 +16,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ListaProductosComponent } from './components/lista-productos/lista-productos.component';
 import { CarritoComponent } from './components/carrito/carrito.component';
 import { GestionProductosComponent } from './components/gestion-productos/gestion-productos.component';
+import { BusquedaComponent } from './components/busqueda/busqueda.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { GestionProductosComponent } from './components/gestion-productos/gestio
     ListaProductosComponent,
     CarritoComponent,
     GestionProductosComponent,
+    BusquedaComponent,
   ],
   imports: [
     BrowserModule,
