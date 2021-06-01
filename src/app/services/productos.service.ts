@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable, of, from } from 'rxjs';
-import { map } from 'rxjs/operators';
 import config from "../config"
 
 @Injectable({
@@ -25,6 +24,10 @@ export class ProductosService {
     return this.http.get(config.api.url+'/api/productos');
   }
 
+  getProductoTipos(){
+    return this.http.get(config.api.url+'/api/productos/tiposProducto');
+  }
+
   insertProducto(producto: any){
     return this.http.post(config.api.url+'/api/productos/', producto);
   }
@@ -33,6 +36,7 @@ export class ProductosService {
     return this.http.put(config.api.url+'/api/productos/', producto);
   }
 
+  
 
 
 }

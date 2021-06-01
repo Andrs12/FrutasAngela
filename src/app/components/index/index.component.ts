@@ -12,7 +12,7 @@ export class IndexComponent implements OnInit {
   constructor(private cookie: CookieService, private usuario: UsuarioService) { }
 
   ngOnInit(): void {
-    console.log(this.usuario.getUserLogged)
+    console.log(this.usuario.getToken)
   }
 
 

@@ -1,7 +1,7 @@
 <div class="d-flex flex-column p-3 text-white bg-dark h-100" style="width: 280px;">
   <ul class="nav nav-pills flex-column mb-auto">
     <li class="nav-item">
-      <a routerLink="/" class="nav-link active" aria-current="page">
+      <a routerLink="/" class="nav-link text-white" aria-current="page" [ngClass]="{'active':rutas.inicio}" (click)="rutaActiva()">
         <svg class="bi me-2" width="16" height="16">
           <use ></use>
         </svg>
@@ -9,38 +9,40 @@
       </a>
     </li>
     <li>
-      <a routerLink="/productos" class="nav-link text-white">
+      <a routerLink="/productos" class="nav-link text-white" [ngClass]="{'active':rutas.productos}" (click)="rutaActiva()">
         <svg class="bi me-2" width="16" height="16">
           <use xlink:href="#speedometer2"></use>
         </svg>
         Productos
       </a>
     </li>
-    <li>
-      <a href="#" class="nav-link text-white">
+    <li *ngIf="configuracionProducto">
+      <a routerLink="/configuracionProductos" class="nav-link text-white" [ngClass]="{'active':rutas.gestionProductos}" (click)="rutaActiva()">
         <svg class="bi me-2" width="16" height="16">
           <use xlink:href="#table"></use>
         </svg>
-        Categorias
+        Gestion Productos
       </a>
     </li>
   </ul>
   <hr>
   <div class="dropdown">
     <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1"
-      data-bs-toggle="dropdown" aria-expanded="false">
+      data-bs-toggle="dropdown" aria-expanded="false" (click)="rutaActiva()">
       <img
-        src="https://c0.klipartz.com/pngpicture/348/800/gratis-png-hombre-vestido-con-camisa-azul-ilustracion-iconos-de-computadora-avatar-usuario-login-avatar.png"
+        src="https://i.ibb.co/PCm5D4Z/Usuario.png"
         alt="" width="32" height="32" class="rounded-circle me-2">
-      <strong>Usuario</strong>
+      <strong >{{usuario.nombre}}</strong>
+      
     </a>
     <ul class="dropdown-menu dropdown-menu text-small" aria-labelledby="dropdownUser1">
-      <li><a class="dropdown-item" routerLink="/login">Iniciar Sesion</a></li>
-      <li><a class="dropdown-item" routerLink="/register">Registrar</a></li>
+      <li><a class="dropdown-item" routerLink="/login" *ngIf='!getloging()'>Iniciar Sesion</a></li>
+      <li><a class="dropdown-item" routerLink="/register" *ngIf='getloging()'>Ajustes usuario</a></li>
+      <li><a class="dropdown-item" routerLink="/register" *ngIf='!getloging()'>Registrar</a></li>
       <li>
         <hr class="dropdown-divider">
       </li>
-      <li><a class="dropdown-item" (click)="logout()">Salir</a></li>
+      <div *ngIf='getloging()'><li><a class="dropdown-item" (click)="logout()" >Salir</a></li></div>
     </ul>
   </div>
 </div>

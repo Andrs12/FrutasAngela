@@ -14,6 +14,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ListaProductosComponent } from './components/lista-productos/lista-productos.component';
+import { CarritoComponent } from './components/carrito/carrito.component';
+import { GestionProductosComponent } from './components/gestion-productos/gestion-productos.component';
 
 
 @NgModule({
@@ -25,6 +27,8 @@ import { ListaProductosComponent } from './components/lista-productos/lista-prod
     LoginComponent,
     RegisterComponent,
     ListaProductosComponent,
+    CarritoComponent,
+    GestionProductosComponent,
   ],
   imports: [
     BrowserModule,

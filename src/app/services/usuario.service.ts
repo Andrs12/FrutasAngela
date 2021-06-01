@@ -10,24 +10,27 @@ import jwt_decode from "jwt-decode";
   providedIn: 'root'
 })
 export class UsuarioService {
+  
+  constructor(private http: HttpClient, private cookies: CookieService) {
+    const usuario = this.getUserLogged();
 
-  constructor(private http: HttpClient, private cookies: CookieService) { }
+   }
 
 
   getUsuario(id: number): Observable<any> {
-    return this.http.get(config.api.url+'/api/usuarios/' + id);
+    return this.http.get(config.api.url + '/api/usuarios/' + id);
   }
   getUsuarios(): Observable<any> {
-    return this.http.get(config.api.url+'/api/usuarios/');
+    return this.http.get(config.api.url + '/api/usuarios/');
   }
 
   login(usuario: any): Observable<any> {
-    return this.http.post(config.api.url+'/api/usuarios/login', usuario);
+    location.reload();
+    return this.http.post(config.api.url + '/api/usuarios/login', usuario);
   }
 
   register(usuario: any): Observable<any> {
-    console.log(usuario)
-    return this.http.post(config.api.url+'/api/usuarios/register', usuario);
+    return this.http.post(config.api.url + '/api/usuarios/register', usuario);
   }
 
   setToken(token: string) {
@@ -37,20 +40,20 @@ export class UsuarioService {
     return this.cookies.get("token");
   }
 
-  getUserLogged() {
-    var decoded = jwt_decode(this.cookies.get("token"));
-    console.log(decoded);
+  getUserLogged(): Observable<any> {
+    const token = {
+      token: this.getToken()
+    };
+    return this.http.post(config.api.url + '/api/usuarios/descifrar', token);
+  }
 
-    /* return ({
-      nombre: decode.body.nombre,
-      apellido1: decode.body.apellido1,
-      apellido2: decode.body.apellido2,
-      telefono: decode.body.telefono,
-      email: decode.body.email,
-      contrasena: decode.body.contrasena
-    }); */
-  } 
-  
-  logout(){
-    this.cookies.delete("token");  }
+  getDirecciones(id: number){
+    return this.http.get(config.api.url + '/api/usuarios/direcciones/' + id);
+  }
+
+  logout() {
+    
+    this.cookies.delete("token");
+    location.reload();
+  }
 }
