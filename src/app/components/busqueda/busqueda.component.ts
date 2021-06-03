@@ -32,11 +32,11 @@ export class BusquedaComponent implements OnInit {
 
   addCarrito(id_producto: number) {
     for (let i = 0; i < this.unidades.length; i++) {
-      if (this.unidades[i].ID == id_producto) {
+      if (this.unidades[i].id == id_producto) {
         const productoCarro = {
-          'ID_PRODUCTO': id_producto,
-          'UNIDADES': this.unidades[i].UNIDADES,
-          'CARRITO_ID': this.usuario.carro
+          'id_producto': id_producto,
+          'unidades': this.unidades[i].unidades,
+          'carrito_id': this.usuario.carro
         }
         console.log(productoCarro);
         this.carritoService.insertarProductoCarrito(productoCarro).subscribe(data => {
@@ -52,8 +52,8 @@ export class BusquedaComponent implements OnInit {
     for (let i = 0; i < this.unidades.length; i++) {
       if (this.unidades[i].id == id) {
         this.unidades[i] = {
-          'ID': id,
-          'UNIDADES': event.target.value
+          'id': id,
+          'unidades': event.target.value
         }
         existe = true;
       }

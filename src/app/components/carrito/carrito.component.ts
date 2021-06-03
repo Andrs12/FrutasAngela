@@ -26,10 +26,9 @@ export class CarritoComponent implements OnInit {
       this.usuario = data;
       this.carritoService.getProductosCarrito(data.carro).subscribe(dataCarro => {
         this.productosCarrito = dataCarro;
-        console.log(this.productosCarrito);
+
         this.usuarioService.getDirecciones(this.usuario.id).subscribe(dataDirecciones => {
           this.direcciones = dataDirecciones;
-
         });
       });
     });
@@ -38,20 +37,26 @@ export class CarritoComponent implements OnInit {
 
   public venta() {
     var direccion = {
-      ID_Direccion: this.idDireccion,
-      ID_Carrito: this.usuario.carro
+      id_direccion: this.idDireccion,
+      id_carrito: this.usuario.carro
     }
     const venta = this.productosCarrito.concat(direccion);
     this.carritoService.realizarCompra(venta).subscribe(data => {
+
+      this.carritoService.getProductosCarrito(this.usuario.carro).subscribe(dataCarro => {
+        this.productosCarrito = dataCarro;
+      });
 
     });
   }
 
   eliminarProducto(id_producto: number) {
     this.carritoService.eliminarProductoCarrito(id_producto).subscribe(data => {
-      location.reload();
-
+      this.carritoService.getProductosCarrito(this.usuario.carro).subscribe(dataCarro => {
+        this.productosCarrito = dataCarro;
+      });
     });
 
   }
+
 }

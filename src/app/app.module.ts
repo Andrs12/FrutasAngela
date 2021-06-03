@@ -17,6 +17,7 @@ import { ListaProductosComponent } from './components/lista-productos/lista-prod
 import { CarritoComponent } from './components/carrito/carrito.component';
 import { GestionProductosComponent } from './components/gestion-productos/gestion-productos.component';
 import { BusquedaComponent } from './components/busqueda/busqueda.component';
+import { AjustesUsuarioComponent } from './components/ajustes-usuario/ajustes-usuario.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { BusquedaComponent } from './components/busqueda/busqueda.component';
     CarritoComponent,
     GestionProductosComponent,
     BusquedaComponent,
+    AjustesUsuarioComponent,
   ],
   imports: [
     BrowserModule,

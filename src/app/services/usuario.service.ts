@@ -51,6 +51,18 @@ export class UsuarioService {
     return this.http.get(config.api.url + '/api/usuarios/direcciones/' + id);
   }
 
+  insertarDireccion(direccion: any){
+    return this.http.post(config.api.url + '/api/usuarios/direcciones',direccion);
+  }
+
+  eliminarDireccion(idDireccion: any){
+    return this.http.delete(config.api.url + '/api/usuarios/direcciones/'+idDireccion);
+  }
+
+  actualizar(usuario:any){
+    return this.http.put(config.api.url + '/api/usuarios/', usuario);
+  }
+
   logout() {
     
     this.cookies.delete("token");

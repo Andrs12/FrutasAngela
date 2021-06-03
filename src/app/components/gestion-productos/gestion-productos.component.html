@@ -1,91 +1,136 @@
-<div>
-    <h2>GESTION PRODUCTOS</h2>
-    <hr>
-    <div class="row">
-        <button type="button" class="btn btn-primary col mx-1" (click)='desplegar("add")'>Añadir</button>
-        <button type="button" class="btn btn-primary col mx-1" (click)='desplegar("update")'>Modificar</button>
-        <button type="button" class="btn btn-primary col mx-1" (click)='desplegar("delete")'>Eliminar</button>
-    </div>
-    <div *ngIf="add">
-        <form>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <div id="emailHelp" class="form-text">Nombre del producto</div>
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Descripcion</label>
-                <input type="text" class="form-control" id="exampleInputPassword1">
-                <div id="emailHelp" class="form-text">Introduce una descripcion del producto</div>
-            </div>
-            <div class="mb-3">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Tipo de producto</option>
-                    <option value="{{tipo.ID}}" *ngFor="let tipo of tiposProducto">{{tipo.TIPO}}</option>
-                </select>
-                <button class="btn btn-primary mt-2">Añadir tipo</button>
-            </div>
-            <div class="mb-3">
-                <input class="w-50" type=number min=0.1 value="1" step="0.1"> €/kg
-            </div>
-            <div class="mb-3">
-                <input class="w-50" type=number min=1 value="1"> Stock
-            </div> 
-            <div class="mb-3">
-                <input class="w-50" type=url> Imagen URL
-            </div>
+<div class="accordion accordion-flush" id="accordionFlushExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                Añadir Producto
+            </button>
+        </h2>
+        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+            data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">Nombre</label>
+                        <input type="text" class="form-control" name="nombre" [(ngModel)]="productoNuevo.nombre">
+                        <div class="form-text">Nombre del producto</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Descripcion</label>
+                        <input type="text" class="form-control" name="descripcion"
+                            [(ngModel)]="productoNuevo.descripcion">
+                        <div id="emailHelp" class="form-text">Introduce una descripcion del producto</div>
+                    </div>
+                    <div class="mb-3">
+                        <select class="form-select" aria-label="Default select example" name="tipo_producto"
+                            [(ngModel)]="productoNuevo.tipo_producto">
+                            <option selected>Tipo de producto</option>
+                            <option value={{tipo.id}} *ngFor="let tipo of tiposProducto">{{tipo.tipo}}</option>
+                        </select>
+                        <button class="btn btn-primary mt-2">Añadir tipo</button>
+                    </div>
+                    <div class="mb-3">
+                        <input class="w-50" type=number min=0.1 value="1" step="0.1" name="pvp_unidad"
+                            [(ngModel)]="productoNuevo.pvp_unidad"> €/kg
+                    </div>
+                    <div class="mb-3">
+                        <input class="w-50" type=number min=1 value="1" name="stock" [(ngModel)]="productoNuevo.stock">
+                        Stock
+                    </div>
+                    <div class="mb-3">
+                        <img src="{{productoNuevo.imagen}}">
+                        <input class="w-50" type=url name="imagen" [(ngModel)]="productoNuevo.imagen"> Imagen URL
+                    </div>
 
-            <button type="submit" class="btn btn-primary" data-toggle="modal" href="#addTipoProducto" onclick="<script>
-                $('#addTipoProducto').modal(options)
-              </script>">Añadir Producto</button>
-        </form>
-    </div>
-    <div class="update" *ngIf="update">
-        <h2>Modificar</h2>
-        <form>
-            <div class="mb-3">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Producto a modificar</option>
-                    <option value="{{producto.ID}}" *ngFor="let producto of productos">{{producto.NOMBRE}}</option>
-                </select>
-                <div id="emailHelp" class="form-text">Selecciona un producto para modificar</div>
-            </div>
-        </form>
-
-    </div>
-    <div class="delete" *ngIf="delete">
-        <h2>Eliminar</h2>
-        <form>
-            <div class="mb-3">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Producto a eliminar</option>
-                    <option value="{{producto.ID}}" *ngFor="let producto of productos">{{producto.NOMBRE}}</option>
-                </select>
-                <div id="emailHelp" class="form-text">Selecciona un producto para eliminar</div>
-            </div>
-        </form>
-    </div>
-
-    <!-- MODAL TIPO PRODUCTO -->
-    <div class="modal fade" id="addTipoProducto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+                    <button type="submit" class="btn btn-primary" (click)="addProducto()">Añadir
+                        Producto</button>
+                </form>
             </div>
         </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                Modificar Producto
+            </button>
+        </h2>
+        <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+            data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                <form>
+                    <div class="mb-3">
+                        <select class="form-select" aria-label="Default select example" (change)="cargarModificar()"
+                            name="productoIdModificar" [(ngModel)]="productoIdModificar">
+                            <option selected>Producto a modificar></option>
+                            <option value={{producto.id}} *ngFor="let producto of productos">{{producto.nombre}}
+                            </option>
+                        </select>
+                        <div id="emailHelp" class="form-text">Selecciona un producto para modificar</div>
+                    </div>
+                </form>
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">Nombre</label>
+                        <input type="text" class="form-control" name="nombre" [(ngModel)]="productoModificar.nombre">
+                        <div class="form-text">Nombre del producto</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Descripcion</label>
+                        <input type="text" class="form-control" name="descripcion"
+                            [(ngModel)]="productoModificar.descripcion">
+                        <div id="emailHelp" class="form-text">Introduce una descripcion del producto</div>
+                    </div>
+                    <div class="mb-3">
+                        <select class="form-select" aria-label="Default select example" name="tipo_producto"
+                            [(ngModel)]="productoModificar.tipo_producto">
+                            <option selected>Tipo de producto</option>
+                            <option value="{{tipo.id}}" *ngFor="let tipo of tiposProducto">{{tipo.tipo}}</option>
+                        </select>
+                        <button class="btn btn-primary mt-2">Añadir tipo</button>
+                    </div>
+                    <div class="mb-3">
+                        <input class="w-50" type=number min=0.1 value="1" step="0.1" name="pvp_unidad"
+                            [(ngModel)]="productoModificar.pvp_unidad"> €/kg
+                    </div>
+                    <div class="mb-3">
+                        <input class="w-50" type=number min=1 value="1" name="stock"
+                            [(ngModel)]="productoModificar.stock"> Stock
+                    </div>
+                    <div class="mb-3">
+                        <img src="{{productoModificar.imagen}}">
+                        <input class="w-50" type=url name="imagen" [(ngModel)]="productoModificar.imagen"> Imagen URL
+                    </div>
 
+                    <button type="submit" class="btn btn-primary" (click)="modificarProducto()">Modificar
+                        Producto</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                Eliminar Producto
+            </button>
+        </h2>
+        <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
+            data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                <form>
+                    <div class="mb-3">
+                        <select class="form-select" aria-label="Default select example" [(ngModel)]="productoIdEliminar" name="productoIdEliminar">
+                            <option selected>Producto a eliminar</option>
+                            <option value="{{producto.id}}" *ngFor="let producto of productos">
+                                {{producto.nombre}} - {{producto.descripcion}}</option>
+                        </select>
+                        <div class="form-text">Selecciona un producto para eliminar</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" (click)="eliminarProducto()">Eliminar
+                        Producto</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>

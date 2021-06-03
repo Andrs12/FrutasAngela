@@ -26,5 +26,10 @@ export class AppComponent {
     }
 
   }
+
+   abrirModal() {
+    console.log("HOLA")
+
+}
 }
 

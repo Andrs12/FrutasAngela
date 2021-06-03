@@ -1,12 +1,12 @@
 <ul class="list-group my-4 mr-4">
     <li *ngFor="let producto of listaProductos" class="list-group-item">
         <div class="row">
-            <h2>{{producto.NOMBRE}}</h2>
-            <img src={{producto.IMAGEN}} class="col-2 align-self-center"/>
-            <p class="col align-self-center">{{producto.DESCRIPCION}}</p>
-            <p class="col align-self-center"><button class="btn btn-outline-secondary" disabled>{{producto.PVP_UNIDAD}} €/kg </button></p> 
-            <p class= "col-1 h-25 align-self-center"><input class="w-100" id="stock" type=number min=0.1 max={{producto.STOCK}} value="0"step="0.1" (change)="actualizaUnidades($event,producto.ID)" #unidades+producto.ID> KG</p>
-            <a class="col align-self-center"><i class="fas fa-plus fa-3x" (click)="addCarrito(producto.ID)"></i></a>
+            <h2>{{producto.nombre}}</h2>
+            <img src={{producto.imagen}} class="col-2 align-self-center"/>
+            <p class="col align-self-center">{{producto.descripcion}}</p>
+            <p class="col align-self-center"><button class="btn btn-outline-secondary" disabled>{{producto.pvp_unidad}} €/kg </button></p> 
+            <p class= "col-1 h-25 align-self-center"><input class="w-100" id="stock" type=number min=0.1 max={{producto.stock}} value="0"step="0.1" (change)="actualizaUnidades($event,producto.id)" #unidades+producto.id> KG</p>
+            <a class="col align-self-center"><i class="fas fa-plus fa-3x" (click)="addCarrito(producto.id)"></i></a>
         </div>
     </li>
 </ul>

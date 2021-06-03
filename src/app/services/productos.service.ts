@@ -8,35 +8,39 @@ import config from "../config"
 })
 export class ProductosService {
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
 
   }
   getProducto(id: number): Observable<any> {
-    return this.http.get(config.api.url+'/api/productos/' + id);
+    return this.http.get(config.api.url + '/api/productos/' + id);
 
   }
 
   getProductoNombre(nombre: string): Observable<any> {
-    return this.http.get(config.api.url+'/api/productos/nombre/' + nombre);
+    return this.http.get(config.api.url + '/api/productos/nombre/' + nombre);
 
   }
-  getProductos(){
-    return this.http.get(config.api.url+'/api/productos');
+  getProductos() {
+    return this.http.get(config.api.url + '/api/productos');
   }
 
-  getProductoTipos(){
-    return this.http.get(config.api.url+'/api/productos/tiposProducto');
+  getProductoTipos() {
+    return this.http.get(config.api.url + '/api/productos/tiposProducto');
   }
 
-  insertProducto(producto: any){
-    return this.http.post(config.api.url+'/api/productos/', producto);
+  insertProducto(producto: any) {
+    return this.http.post(config.api.url + '/api/productos/', producto);
   }
 
-  updateProducto(producto: any){
-    return this.http.put(config.api.url+'/api/productos/', producto);
+  updateProducto(producto: any) {
+    return this.http.put(config.api.url + '/api/productos/', producto);
   }
 
-  
+  eliminarProducto(id: number) {
+    return this.http.delete(config.api.url + '/api/productos/'+id );
+  }
+
+
 
 
 }
