@@ -12,6 +12,7 @@ export class ListaProductosComponent implements OnInit {
   public listaProductos: any;
   public unidades: any = [];
   public usuario: any;
+  public total: any = [];
   constructor(private producto: ProductosService, private usuarioService: UsuarioService, private carritoService: CarritoService) {
 
   }
@@ -44,7 +45,7 @@ export class ListaProductosComponent implements OnInit {
     }
   }
 
-  actualizaUnidades(event: any, id: number) {
+  actualizaUnidades(event: any, id: number, pvp_undidad: number) {
     let existe = false;
     for (let i = 0; i < this.unidades.length; i++) {
       if (this.unidades[i].id == id) {
@@ -62,6 +63,7 @@ export class ListaProductosComponent implements OnInit {
           'unidades': event.target.value
         });
     }
-    console.log(this.unidades);
+    this.total[id] = event.target.value * pvp_undidad;
+    this.total[id] = this.total[id].toFixed(2);
   }
 }

@@ -36,6 +36,7 @@ export class GestionProductosComponent implements OnInit {
 
 
   ngOnInit(): void {
+    
     this.productoService.getProductoTipos().subscribe(data => {
       this.tiposProducto = data;
     });

@@ -4,18 +4,22 @@
 <div class="productos">
     <ul class="list-group my-4 mr-4">
         <li *ngFor="let producto of productosCarrito" class="list-group-item">
-            <div class="row">
-                <h2>{{producto.nombre}}</h2>
-                <div class="col ">
-                    <img src={{producto.imagen}} class="col-2 align-self-center" />
+            <h2>{{producto.nombre}}</h2>
+            <div class="row d-flex justify-content-start align-self-center">
+                <div class="col-3 justify-content-center align-self-center">
+                    <img src={{producto.imagen}} class="w-100" />
                 </div>
-
-                <p class="col-1 h-25 align-self-center"><input class="w-100" type=number min=0.1
-                        value="{{producto.unidades}}" step="0.1"> KG</p>
-
-                <div class="col ">
-                    <a (click)="eliminarProducto(producto.carrito_id_producto)"><i
-                            class="fas fa-trash-alt fa-2x"></i></a>
+                <div class="col d-flex justify-content-center align-self-center">
+                    <p><input  type=number min=0.1 name="unidades" [(ngModel)]="producto.unidades"
+                            step="0.1"> KG</p>
+                </div>
+                <div class="col d-flex justify-content-center align-self-center">
+                    <p class="text-aling-center">Total: <button class="btn btn-outline-secondary" disabled [(ngModel)]="producto.total"
+                            name="total">{{(producto.pvp_unidad*producto.unidades).toFixed(2)}}</button>€</p>
+                </div>
+                <div class="col-1 d-flex justify-content-end align-self-center">
+                    <a class="text-aling-center m-0 p-0" (click)="eliminarProducto(producto.carrito_id_producto)"><i
+                            class="fas fa-trash-alt fa-3x"></i></a>
                 </div>
             </div>
         </li>
@@ -32,6 +36,4 @@
     <div id="emailHelp" class="form-text">Selecciona un direccion</div>
 
 </div>
-<button class="btn btn-primary" (click)="venta()">Realizar Compra</button>
-
-
+<button class="btn bg-success" (click)="venta()">Realizar Compra</button>

@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
       email: this.email,
       contrasena: this.password
     }
-    var token
     this.service.login(usuario).subscribe(data => {
       this.service.setToken(data.token);
       this.router.navigateByUrl('/');

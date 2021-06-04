@@ -27,7 +27,7 @@
                             <option selected>Tipo de producto</option>
                             <option value={{tipo.id}} *ngFor="let tipo of tiposProducto">{{tipo.tipo}}</option>
                         </select>
-                        <button class="btn btn-primary mt-2">Añadir tipo</button>
+                        <button class="btn btn-success mt-2">Añadir tipo</button>
                     </div>
                     <div class="mb-3">
                         <input class="w-50" type=number min=0.1 value="1" step="0.1" name="pvp_unidad"
@@ -42,7 +42,7 @@
                         <input class="w-50" type=url name="imagen" [(ngModel)]="productoNuevo.imagen"> Imagen URL
                     </div>
 
-                    <button type="submit" class="btn btn-primary" (click)="addProducto()">Añadir
+                    <button type="submit" class="btn btn-success" (click)="addProducto()">Añadir
                         Producto</button>
                 </form>
             </div>
@@ -87,7 +87,7 @@
                             <option selected>Tipo de producto</option>
                             <option value="{{tipo.id}}" *ngFor="let tipo of tiposProducto">{{tipo.tipo}}</option>
                         </select>
-                        <button class="btn btn-primary mt-2">Añadir tipo</button>
+                        <button class="btn btn-success mt-2">Añadir tipo</button>
                     </div>
                     <div class="mb-3">
                         <input class="w-50" type=number min=0.1 value="1" step="0.1" name="pvp_unidad"
@@ -102,7 +102,7 @@
                         <input class="w-50" type=url name="imagen" [(ngModel)]="productoModificar.imagen"> Imagen URL
                     </div>
 
-                    <button type="submit" class="btn btn-primary" (click)="modificarProducto()">Modificar
+                    <button type="submit" class="btn btn-success" (click)="modificarProducto()">Modificar
                         Producto</button>
                 </form>
             </div>
@@ -127,7 +127,7 @@
                         </select>
                         <div class="form-text">Selecciona un producto para eliminar</div>
                     </div>
-                    <button type="submit" class="btn btn-primary" (click)="eliminarProducto()">Eliminar
+                    <button type="submit" class="btn btn-success" (click)="eliminarProducto()">Eliminar
                         Producto</button>
                 </form>
             </div>

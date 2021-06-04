@@ -12,6 +12,8 @@ export class CarritoComponent implements OnInit {
   public productosCarrito: any;
   public direcciones: any;
   public idDireccion: number = 0;
+  public unidades: any = [];
+  public total: any = [];
 
   constructor(private usuarioService: UsuarioService, private carritoService: CarritoService, private productoService: ProductosService) {
 
@@ -26,7 +28,8 @@ export class CarritoComponent implements OnInit {
       this.usuario = data;
       this.carritoService.getProductosCarrito(data.carro).subscribe(dataCarro => {
         this.productosCarrito = dataCarro;
-
+        console.log(this.productosCarrito);
+    
         this.usuarioService.getDirecciones(this.usuario.id).subscribe(dataDirecciones => {
           this.direcciones = dataDirecciones;
         });
@@ -57,6 +60,27 @@ export class CarritoComponent implements OnInit {
       });
     });
 
+  }
+
+  actualizaUnidades(event: any, id: number, pvp_undidad: number) {
+    let existe = false;
+    for (let i = 0; i < this.unidades.length; i++) {
+      if (this.unidades[i].id == id) {
+        this.unidades[i] = {
+          'id': id,
+          'unidades': event.target.value
+        }
+        existe = true;
+      }
+    }
+    if (!existe) {
+      this.unidades.push(
+        {
+          'id': id,
+          'unidades': event.target.value
+        });
+    }
+    this.total[id] = (event.target.value * pvp_undidad).toFixed(2);
   }
 
 }
