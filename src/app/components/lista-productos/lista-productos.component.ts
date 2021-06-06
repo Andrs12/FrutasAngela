@@ -35,6 +35,7 @@ export class ListaProductosComponent implements OnInit {
           'carrito_id': this.usuario.id_carrito
         }
         this.carritoService.insertarProductoCarrito(productoCarro).subscribe(data => {
+          alert("Producto insertado");
         });
       }
     }
