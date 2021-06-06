@@ -19,7 +19,8 @@ export class SidebarComponent implements OnInit {
   public rutas = {
     inicio: false,
     productos: false,
-    gestionProductos: false
+    gestionProductos: false,
+    ventas: false
   }
 
   constructor(private service: UsuarioService, private modal: NgbModal, private router: Router) { }
@@ -27,10 +28,13 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     this.rutaActiva()
 
-    this.service.getUserLogged().subscribe(data => {
-      this.usuario = data;
-      this.mostrar();
-    });
+    if (this.service.getToken() != 'undefined' && this.service.getToken() != '') {
+      this.service.getUserLogged().subscribe(data => {
+        this.usuario = data;
+        this.mostrar();
+      });
+
+    }
 
 
   }
@@ -43,31 +47,38 @@ export class SidebarComponent implements OnInit {
 
   public rutaActiva() {
     setTimeout(() => {
-      console.log(this.router.url)
       switch (this.router.url) {
         case "/":
           this.rutas.inicio = true;
           this.rutas.productos = false;
           this.rutas.gestionProductos = false;
+          this.rutas.ventas = false;
           break;
         case "/productos":
           this.rutas.inicio = false;
           this.rutas.productos = true;
           this.rutas.gestionProductos = false;
+          this.rutas.ventas = false;
           break;
         case "/configuracionProductos":
           this.rutas.inicio = false;
           this.rutas.productos = false;
           this.rutas.gestionProductos = true;
+          this.rutas.ventas = false;
           break;
-
+        case "/ventas":
+          this.rutas.inicio = false;
+          this.rutas.productos = false;
+          this.rutas.gestionProductos = false;
+          this.rutas.ventas = true;
+          break;
       }
     }, 10);
 
   }
 
   public getloging() {
-    if (this.service.getToken() == "") {
+    if (this.service.getToken() == "" || this.service.getToken() == 'undefined') {
       return false;
     } else {
       return true;

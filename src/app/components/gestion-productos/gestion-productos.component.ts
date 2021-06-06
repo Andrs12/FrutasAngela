@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductosService } from "../../services/productos.service";
 import { UsuarioService } from "../../services/usuario.service";
 import { FormsModule } from '@angular/forms';
-
+import config from "../../config"
 @Component({
   selector: 'app-gestion-productos',
   templateUrl: './gestion-productos.component.html',
@@ -16,16 +16,14 @@ export class GestionProductosComponent implements OnInit {
     nombre: "",
     descripcion: "",
     pvp_unidad: 0,
-    stock: 0,
     imagen: "",
     tipo_producto: 0
   };
   public productoIdModificar = 0;
   public productoModificar = {
-    nombre: "das",
-    descripcion: "fsafa",
+    nombre: "",
+    descripcion: "",
     pvp_unidad: 0,
-    stock: 0,
     imagen: "",
     tipo_producto: 0
   };
@@ -36,54 +34,70 @@ export class GestionProductosComponent implements OnInit {
 
 
   ngOnInit(): void {
-    
-    this.productoService.getProductoTipos().subscribe(data => {
-      this.tiposProducto = data;
-    });
-    this.productoService.getProductos().subscribe(data => {
-      this.productos = data;
-    });
-  }
-
-  public getRol() {
-    this.usuario.getUserLogged().subscribe(data => {
-      if (data.rol == 1) {
-        return true;
-      } else {
-        return false;
-      }
-    });
-    return false;
+    const token = this.usuario.getToken();
+    if (token != null) {
+      this.usuario.getUserLogged().subscribe(data => {
+        if (data.rol != 1) {
+          alert("Tu usuario no tiene permiso para entrar aqui");
+          location.href = config.web.raiz;
+        } else {
+          this.productoService.getProductoTipos().subscribe(data => {
+            this.tiposProducto = data;
+          });
+          this.productoService.getProductos().subscribe(data => {
+            this.productos = data;
+          });
+        }
+      });
+    }
   }
 
   public addProducto() {
-    console.log(this.productoNuevo);
-    this.productoService.insertProducto(this.productoNuevo).subscribe(data => {
-      alert("Producto Insertado")
-    });
+    if (this.productoNuevo.nombre == "" || this.productoNuevo.pvp_unidad == 0 || this.productoNuevo.imagen == "") {
+      alert("Rellene los campos: \n- Nombre \n- PVP Unidad \n- Imagen")
+    } else {
+      this.productoService.insertProducto(this.productoNuevo).subscribe(data => {
+        alert(data.message);
+      });
+    }
   }
 
   public modificarProducto() {
-console.log(this.productoModificar)
-this.productoService.updateProducto(this.productoModificar).subscribe(data => {
 
-});
+    if (this.productoIdModificar == 0) {
+      alert("Selecione un producto");
+    } else {
+      if (this.productoModificar.nombre == "" || this.productoModificar.pvp_unidad == 0 || this.productoModificar.imagen == "") {
+        alert("Los campos: \n- Nombre \n- PVP Unidad \n- Imagen \nNo pueden estar vacios")
+
+      } else {
+        this.productoService.updateProducto(this.productoModificar).subscribe(data => {
+          alert(data.message);
+        });
+      }
+
+    }
+
   }
 
   public cargarModificar() {
-    console.log(this.productoIdModificar)
     this.productoService.getProducto(this.productoIdModificar).subscribe(data => {
       this.productoModificar = data[0];
-      console.log(this.productoModificar)
     });
 
   }
 
   public eliminarProducto() {
-    console.log(this.productoIdModificar)
-    this.productoService.eliminarProducto(this.productoIdEliminar).subscribe(data => {
-
-    });
+    if(this.productoIdEliminar ==0){
+      alert("Selecione un producto a eliminar")
+    } else {
+   
+      this.productoService.eliminarProducto(this.productoIdEliminar).subscribe(data => {
+        alert(data.message);
+  
+      });
+    }
+    
 
   }
 }

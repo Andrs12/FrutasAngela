@@ -1,15 +1,41 @@
-
-<div class="register">
-    <form class="custom-form" method="post">
-      <h1>Register</h1>
-      <input type="nombre" [(ngModel)]="nombre" name="nombre" placeholder="Nombre" required="required"/>
-      <input type="apellido1" [(ngModel)]="apellido1" name="apellido1" placeholder="Primer apellido" required="required"/>
-      <input type="apellido2" [(ngModel)]="apellido2" name="apellido2" placeholder="Segundo apellido"/>
-      <input type="email" [(ngModel)]="email" name="email" placeholder="Email" required="required"/>
-      <input type="password" [(ngModel)]="password" name="password" placeholder="Password" required="required"/>
-      <input type="password" name="password" placeholder="Repeat the password" required="required"/>
-      <input type="telefono" [(ngModel)]="telefono" name="telefono" placeholder="Telefono" required="required"/>
-
-      <button type="submit" (click)="register()">Register</button>
-    </form>
+<h1 class="my-3">Registro de usuarios</h1>
+<hr>
+<div class="row mr-3">
+  <div class="col">
+    <div class="mb-3">
+      <label class="form-label">Nombre</label>
+      <input type="text" class="form-control" [(ngModel)]="usuario.nombre" name="nombre">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Primer apellido</label>
+      <input type="text" class="form-control" [(ngModel)]="usuario.apellido1" name="apellido1">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Segundo apellido</label>
+      <input type="text" class="form-control" [(ngModel)]="usuario.apellido2" name="apellido2">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Telefono</label>
+      <input type="tel" class="form-control" [(ngModel)]="usuario.telefono" name="telefono">
+    </div>
   </div>
+  <!-- Col 2 -->
+  <div class="col">
+    <div class="mb-3">
+      <label class="form-label">Contraseña</label>
+      <input type="password" [(ngModel)]="usuario.contrasena" name="contrasena" class="form-control">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Confirmar Contraseña</label>
+      <input type="password" [(ngModel)]="confirmarContrasena" name="confirmarContrasena" class="form-control">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input type="email" class="form-control" [(ngModel)]="usuario.email" name="email">
+    </div>
+
+
+  </div>
+
+</div>
+<button type="submit" class="btn bg-success text-white" (click)="registrar()">Guardar cambios</button>

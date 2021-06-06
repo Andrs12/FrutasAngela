@@ -10,10 +10,12 @@ import { CarritoService } from "../../services/carrito.service";
   styleUrls: ['./busqueda.component.css']
 })
 export class BusquedaComponent implements OnInit {
-
+  public resultado: boolean = false;
   public listaProductos: any;
   public unidades: any = [];
   public usuario: any;
+  public total: any = [];
+
   constructor(private route: ActivatedRoute, private producto: ProductosService, private usuarioService: UsuarioService, private carritoService: CarritoService) {
 
   }
@@ -23,6 +25,9 @@ export class BusquedaComponent implements OnInit {
     
     this.listaProductos = this.producto.getProductoNombre(nombre+"").subscribe(data => {
       this.listaProductos = data;
+      if(this.listaProductos[0] != undefined){
+        this.resultado = true;
+      }
     });
     this.usuarioService.getUserLogged().subscribe(data => {
       this.usuario = data
@@ -35,19 +40,16 @@ export class BusquedaComponent implements OnInit {
       if (this.unidades[i].id == id_producto) {
         const productoCarro = {
           'id_producto': id_producto,
-          'unidades': this.unidades[i].unidades,
-          'carrito_id': this.usuario.carro
+          'unidades': parseFloat(this.unidades[i].unidades),
+          'carrito_id': this.usuario.id_carrito
         }
-        console.log(productoCarro);
         this.carritoService.insertarProductoCarrito(productoCarro).subscribe(data => {
-
         });
-
       }
     }
   }
 
-  actualizaUnidades(event: any, id: number) {
+  actualizaUnidades(event: any, id: number, pvp_undidad: number) {
     let existe = false;
     for (let i = 0; i < this.unidades.length; i++) {
       if (this.unidades[i].id == id) {
@@ -65,6 +67,8 @@ export class BusquedaComponent implements OnInit {
           'unidades': event.target.value
         });
     }
+    this.total[id] = event.target.value * pvp_undidad;
+    this.total[id] = this.total[id].toFixed(2);
   }
 }
 

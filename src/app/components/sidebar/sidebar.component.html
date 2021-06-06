@@ -26,6 +26,14 @@
         Gestion Productos
       </a>
     </li>
+    <li *ngIf="configuracionProducto">
+      <a routerLink="/ventas" class="nav-link text-white w-100"
+        [ngClass]="{'bg-success':rutas.ventas}" (click)="rutaActiva()">
+        <svg class="bi me-2" width="16" height="16">
+        </svg>
+        Resumen Ventas
+      </a>
+    </li>
 
 </ul>
 <hr>

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from "../../services/usuario.service";
-import { Router } from '@angular/router';
-
+import config from "../../config"
 
 @Component({
   selector: 'app-login',
@@ -12,7 +11,7 @@ export class LoginComponent implements OnInit {
   email: string;
   password: string;
 
-  constructor(private service: UsuarioService, private router: Router) {
+  constructor(private service: UsuarioService) {
     this.email = "";
     this.password = "";
   }
@@ -23,8 +22,12 @@ export class LoginComponent implements OnInit {
       contrasena: this.password
     }
     this.service.login(usuario).subscribe(data => {
-      this.service.setToken(data.token);
-      this.router.navigateByUrl('/');
+      if (data.message == undefined) {
+        this.service.setToken(data.token);
+        location.href = config.web.raiz;
+      } else {
+        alert(data.message);
+      }
     });
   }
 

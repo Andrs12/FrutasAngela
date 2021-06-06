@@ -12,6 +12,7 @@ export class CarritoComponent implements OnInit {
   public productosCarrito: any;
   public direcciones: any;
   public idDireccion: number = 0;
+  public nuevaDireccion = "";
   public unidades: any = [];
   public total: any = [];
 
@@ -23,39 +24,50 @@ export class CarritoComponent implements OnInit {
     this.inicializar();
 
   }
-  async inicializar() {
+
+  inicializar() {
     this.usuarioService.getUserLogged().subscribe(data => {
       this.usuario = data;
-      this.carritoService.getProductosCarrito(data.carro).subscribe(dataCarro => {
+      this.carritoService.getProductosCarrito(data.id_carrito).subscribe(dataCarro => {
         this.productosCarrito = dataCarro;
-        console.log(this.productosCarrito);
-    
+
         this.usuarioService.getDirecciones(this.usuario.id).subscribe(dataDirecciones => {
           this.direcciones = dataDirecciones;
         });
       });
     });
-
   }
 
   public venta() {
-    var direccion = {
-      id_direccion: this.idDireccion,
-      id_carrito: this.usuario.carro
-    }
-    const venta = this.productosCarrito.concat(direccion);
-    this.carritoService.realizarCompra(venta).subscribe(data => {
-
-      this.carritoService.getProductosCarrito(this.usuario.carro).subscribe(dataCarro => {
-        this.productosCarrito = dataCarro;
+    if (this.idDireccion == 0) {
+      alert("Seleccione una direcion para continuar con la compra");
+    } else {
+      var direccion = {
+        id_direccion: this.idDireccion,
+        id_carrito: this.usuario.id_carrito
+      }
+      const venta = this.productosCarrito.concat(direccion);
+      this.carritoService.insertarVenta(direccion).subscribe(data => {
+        if (data.message = "true") {
+          console.log(venta)
+          this.carritoService.insertarVentaProductos(venta).subscribe(data => {
+            alert("Venta realizada con exito, recibira su pedido de aqui a 5 días")
+            this.carritoService.getProductosCarrito(this.usuario.id_carrito).subscribe(dataCarro => {
+              this.productosCarrito = dataCarro;
+            });
+          });
+        }
+        else {
+          alert("No se ha podido realizar su compra");
+        }
       });
+    }
 
-    });
   }
 
   eliminarProducto(id_producto: number) {
     this.carritoService.eliminarProductoCarrito(id_producto).subscribe(data => {
-      this.carritoService.getProductosCarrito(this.usuario.carro).subscribe(dataCarro => {
+      this.carritoService.getProductosCarrito(this.usuario.id_carrito).subscribe(dataCarro => {
         this.productosCarrito = dataCarro;
       });
     });
@@ -83,4 +95,29 @@ export class CarritoComponent implements OnInit {
     this.total[id] = (event.target.value * pvp_undidad).toFixed(2);
   }
 
+  /* Direccion */
+
+  public guardarDireccion() {
+    const nuevaDireccion = {
+      idUsuario: this.usuario.id,
+      direccion: this.nuevaDireccion
+    };
+    this.usuarioService.insertarDireccion(nuevaDireccion).subscribe(data => {
+      this.usuarioService.getDirecciones(this.usuario.id).subscribe(dataDirecciones => {
+        this.direcciones = dataDirecciones;
+
+      });
+
+    });
+  }
+
+  public eliminarDireccion() {
+    this.usuarioService.eliminarDireccion(this.idDireccion).subscribe(data => {
+      this.usuarioService.getDirecciones(this.usuario.id).subscribe(dataDirecciones => {
+        this.direcciones = dataDirecciones;
+
+      });
+
+    });
+  }
 }

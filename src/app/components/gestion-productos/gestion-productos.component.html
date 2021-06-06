@@ -1,3 +1,5 @@
+<h1 class="mt-2">Configuracion de productos</h1>
+<hr>
 <div class="accordion accordion-flush" id="accordionFlushExample">
     <div class="accordion-item">
         <h2 class="accordion-header" id="flush-headingOne">
@@ -34,12 +36,8 @@
                             [(ngModel)]="productoNuevo.pvp_unidad"> €/kg
                     </div>
                     <div class="mb-3">
-                        <input class="w-50" type=number min=1 value="1" name="stock" [(ngModel)]="productoNuevo.stock">
-                        Stock
-                    </div>
-                    <div class="mb-3">
-                        <img src="{{productoNuevo.imagen}}">
                         <input class="w-50" type=url name="imagen" [(ngModel)]="productoNuevo.imagen"> Imagen URL
+                        <img width="500px" class="row" src="{{productoNuevo.imagen}}">   
                     </div>
 
                     <button type="submit" class="btn btn-success" (click)="addProducto()">Añadir
@@ -58,15 +56,16 @@
         <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
             data-bs-parent="#accordionFlushExample">
             <div class="accordion-body">
+                <h3>Seleciona el producto a modificar</h3>
                 <form>
                     <div class="mb-3">
                         <select class="form-select" aria-label="Default select example" (change)="cargarModificar()"
                             name="productoIdModificar" [(ngModel)]="productoIdModificar">
-                            <option selected>Producto a modificar></option>
+                            <option selected value="0">Producto a modificar</option>
                             <option value={{producto.id}} *ngFor="let producto of productos">{{producto.nombre}}
                             </option>
                         </select>
-                        <div id="emailHelp" class="form-text">Selecciona un producto para modificar</div>
+                        <div class="form-text">Selecciona el producto a modificar</div>
                     </div>
                 </form>
                 <form>
@@ -94,12 +93,8 @@
                             [(ngModel)]="productoModificar.pvp_unidad"> €/kg
                     </div>
                     <div class="mb-3">
-                        <input class="w-50" type=number min=1 value="1" name="stock"
-                            [(ngModel)]="productoModificar.stock"> Stock
-                    </div>
-                    <div class="mb-3">
-                        <img src="{{productoModificar.imagen}}">
                         <input class="w-50" type=url name="imagen" [(ngModel)]="productoModificar.imagen"> Imagen URL
+                        <img width="500px" class="row" src="{{productoModificar.imagen}}">   
                     </div>
 
                     <button type="submit" class="btn btn-success" (click)="modificarProducto()">Modificar
@@ -118,10 +113,11 @@
         <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
             data-bs-parent="#accordionFlushExample">
             <div class="accordion-body">
+                <h3>Seleciona el producto a eliminar</h3>
                 <form>
                     <div class="mb-3">
                         <select class="form-select" aria-label="Default select example" [(ngModel)]="productoIdEliminar" name="productoIdEliminar">
-                            <option selected>Producto a eliminar</option>
+                            <option selected value="0">Producto a eliminar</option>
                             <option value="{{producto.id}}" *ngFor="let producto of productos">
                                 {{producto.nombre}} - {{producto.descripcion}}</option>
                         </select>

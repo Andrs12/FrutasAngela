@@ -8,6 +8,7 @@ import { ListaProductosComponent } from "./components/lista-productos/lista-prod
 import { CarritoComponent } from "./components/carrito/carrito.component";
 import { GestionProductosComponent } from "./components/gestion-productos/gestion-productos.component";
 import { BusquedaComponent } from "./components/busqueda/busqueda.component";
+import { VentasComponent } from "./components/ventas/ventas.component";
 import { AjustesUsuarioComponent } from "./components/ajustes-usuario/ajustes-usuario.component";
 
 const routes: Routes = [
@@ -18,8 +19,8 @@ const routes: Routes = [
   { path: "carrito", component: CarritoComponent },
   { path: "configuracionProductos", component: GestionProductosComponent },
   { path: "busqueda/:nombre", component: BusquedaComponent },
-  { path: "ajustesUsuario", component: AjustesUsuarioComponent }
-
+  { path: "ajustesUsuario", component: AjustesUsuarioComponent },
+  { path: "ventas", component: VentasComponent }
 ];
 
 @NgModule({

@@ -1,6 +1,7 @@
+import { trimTrailingNulls } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from "../../services/usuario.service";
-
+import config from "../../config";
 @Component({
   selector: 'app-ajustes-usuario',
   templateUrl: './ajustes-usuario.component.html',
@@ -27,13 +28,21 @@ export class AjustesUsuarioComponent implements OnInit {
   constructor(private usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
-    this.usuarioService.getUserLogged().subscribe(data => {
-      this.usuario = data;
-      this.usuarioService.getDirecciones(this.usuario.id).subscribe(dataDirecciones => {
-        this.direcciones = dataDirecciones;
+    const token: string = this.usuarioService.getToken();
+    if (token.length > 1) {
+      this.usuarioService.getUserLogged().subscribe(data => {
+        this.usuario = data;
+        this.usuarioService.getDirecciones(this.usuario.id).subscribe(dataDirecciones => {
+          this.direcciones = dataDirecciones;
 
-      });
-    })
+        });
+      })
+    }
+    else {
+      alert("Inicia sesion para configurar tu usuario");
+      location.href = config.web.raiz;
+    }
+
 
   }
 
@@ -42,11 +51,12 @@ export class AjustesUsuarioComponent implements OnInit {
 
       this.usuarioService.login(this.usuario).subscribe(data => {
         this.usuarioService.setToken(data.token);
+
       });
     });
 
   }
-
+  /* Direccion */
   public guardarDireccion() {
     const nuevaDireccion = {
       idUsuario: this.usuario.id,

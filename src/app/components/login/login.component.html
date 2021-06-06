@@ -1,11 +1,22 @@
 <!-- login.component.html -->
 
 <div class="login">
-    <form class="custom-form" method="post">
-      <h1>Login</h1>
-      <input type="email" [(ngModel)]="email" name="email" placeholder="Email" required="required"/>
-      <input type="password" [(ngModel)]="password" name="password" placeholder="Password" required="required"/>
-      <button type="submit" (click)="login()">Log in</button>
-    </form>
-  </div> 
 
+  <h1 class="my-3">Iniciar Sesion</h1>
+  <hr>
+  <div class="row mr-3">
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input type="email" class="form-control" [(ngModel)]="email" name="email">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Contraseña</label>
+      <input type="password" [(ngModel)]="password" name="password" class="form-control">
+    </div>
+    <div class="mb-3">
+      <button class="btn bg-success text-white" (click)="login()">Iniciar Sesion</button>
+    </div>
+  </div>
+  
+
+</div>

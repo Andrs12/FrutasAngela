@@ -1,0 +1,26 @@
+<h1 class="my-2">Resumen de ventas</h1>
+<hr>
+<p>Esta pagina proporciona informacion del historial de ventas</p>
+<table class="table mt-2">
+    <thead class="tablaColumnas">
+        <tr >
+            <th scope="col">ID</th>
+            <th scope="col">ID_VENTA</th>
+            <th scope="col">FECHA</th>
+            <th scope="col">PRODUCTO</th>
+            <th scope="col">UNIDADES</th>
+            <th scope="col">TOTAL</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr *ngFor="let venta of resumen">
+            <th scope="row">{{venta.id}}</th>
+            <td>{{venta.id_venta}}</td>
+            <td>{{venta.fecha}}</td>
+            <td>{{venta.nombre}}</td>
+            <td>{{venta.cantidad}}</td>
+            <td>{{venta.total}}</td>
+        </tr>
+    </tbody>
+</table>

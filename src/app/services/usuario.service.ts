@@ -10,11 +10,11 @@ import jwt_decode from "jwt-decode";
   providedIn: 'root'
 })
 export class UsuarioService {
-  
+
   constructor(private http: HttpClient, private cookies: CookieService) {
     const usuario = this.getUserLogged();
 
-   }
+  }
 
 
   getUsuario(id: number): Observable<any> {
@@ -25,19 +25,11 @@ export class UsuarioService {
   }
 
   login(usuario: any): Observable<any> {
-    location.reload();
     return this.http.post(config.api.url + '/api/usuarios/login', usuario);
   }
 
   register(usuario: any): Observable<any> {
     return this.http.post(config.api.url + '/api/usuarios/register', usuario);
-  }
-
-  setToken(token: string) {
-    this.cookies.set("token", token);
-  }
-  getToken() {
-    return this.cookies.get("token");
   }
 
   getUserLogged(): Observable<any> {
@@ -47,24 +39,31 @@ export class UsuarioService {
     return this.http.post(config.api.url + '/api/usuarios/descifrar', token);
   }
 
-  getDirecciones(id: number){
+  getDirecciones(id: number): Observable<any> {
     return this.http.get(config.api.url + '/api/usuarios/direcciones/' + id);
   }
 
-  insertarDireccion(direccion: any){
-    return this.http.post(config.api.url + '/api/usuarios/direcciones',direccion);
+  insertarDireccion(direccion: any): Observable<any> {
+    return this.http.post(config.api.url + '/api/usuarios/direcciones', direccion);
   }
 
-  eliminarDireccion(idDireccion: any){
-    return this.http.delete(config.api.url + '/api/usuarios/direcciones/'+idDireccion);
+  eliminarDireccion(idDireccion: any): Observable<any> {
+    return this.http.delete(config.api.url + '/api/usuarios/direcciones/' + idDireccion);
   }
 
-  actualizar(usuario:any){
+  actualizar(usuario: any): Observable<any> {
     return this.http.put(config.api.url + '/api/usuarios/', usuario);
   }
 
+  setToken(token: string) {
+    this.cookies.set("token", token);
+  }
+  
+  getToken() {
+    return this.cookies.get("token");
+  }
+
   logout() {
-    
     this.cookies.delete("token");
     location.reload();
   }

@@ -20,12 +20,10 @@ export class ListaProductosComponent implements OnInit {
   ngOnInit(): void {
     this.listaProductos = this.producto.getProductos().subscribe(data => {
       this.listaProductos = data;
-      console.log(this.listaProductos)
     });
     this.usuarioService.getUserLogged().subscribe(data => {
       this.usuario = data
     })
-
   }
 
   addCarrito(id_producto: number) {
@@ -33,14 +31,11 @@ export class ListaProductosComponent implements OnInit {
       if (this.unidades[i].id == id_producto) {
         const productoCarro = {
           'id_producto': id_producto,
-          'unidades': this.unidades[i].unidades,
-          'carrito_id': this.usuario.carro
+          'unidades': parseFloat(this.unidades[i].unidades),
+          'carrito_id': this.usuario.id_carrito
         }
-        console.log(productoCarro);
         this.carritoService.insertarProductoCarrito(productoCarro).subscribe(data => {
-
         });
-
       }
     }
   }

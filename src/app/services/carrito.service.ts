@@ -17,10 +17,16 @@ export class CarritoService {
   }
 
   realizarCompra(productosCompra: any): Observable<any> {
-    console.log("REALIZANDO COMPRA")
-    console.log(productosCompra);
     return this.http.post(config.api.url + '/api/carrito/comprar/', productosCompra);
 
+  }
+
+  insertarVenta(datosVenta: any): Observable<any> {
+    return this.http.post(config.api.url + '/api/carrito/venta/', datosVenta);
+  }
+
+  insertarVentaProductos(productosVenta: any): Observable<any> {
+    return this.http.post(config.api.url + '/api/carrito/ventaProducto/', productosVenta);
   }
 
   insertarProductoCarrito(productoCarrito: any): Observable<any> {
@@ -32,6 +38,16 @@ export class CarritoService {
     return this.http.delete(config.api.url + '/api/carrito/carritoProducto/' + id);
 
   }
+
+  insertarCarrito(): Observable<any> {
+    return this.http.post(config.api.url + '/api/carrito', null);
+  }
+
+  resumenVentas(): Observable<any> {
+    return this.http.get(config.api.url + '/api/carrito/resumenVentas');
+  }
+
+
 
 
 }

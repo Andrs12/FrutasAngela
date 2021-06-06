@@ -20,24 +20,24 @@ export class ProductosService {
     return this.http.get(config.api.url + '/api/productos/nombre/' + nombre);
 
   }
-  getProductos() {
+  getProductos(): Observable<any> {
     return this.http.get(config.api.url + '/api/productos');
   }
 
-  getProductoTipos() {
+  getProductoTipos(): Observable<any> {
     return this.http.get(config.api.url + '/api/productos/tiposProducto');
   }
 
-  insertProducto(producto: any) {
+  insertProducto(producto: any): Observable<any> {
     return this.http.post(config.api.url + '/api/productos/', producto);
   }
 
-  updateProducto(producto: any) {
+  updateProducto(producto: any): Observable<any> {
     return this.http.put(config.api.url + '/api/productos/', producto);
   }
 
-  eliminarProducto(id: number) {
-    return this.http.delete(config.api.url + '/api/productos/'+id );
+  eliminarProducto(id: number): Observable<any> {
+    return this.http.delete(config.api.url + '/api/productos/' + id);
   }
 
 

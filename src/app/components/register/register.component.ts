@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from "../../services/usuario.service";
+import { CarritoService } from "../../services/carrito.service";
+
+import config from "../../config"
 
 @Component({
   selector: 'app-register',
@@ -7,37 +10,42 @@ import { UsuarioService } from "../../services/usuario.service";
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  email: string;
-  password: string;
-  confirmPassword: string;
-  nombre: string;
-  apellido1: string;
-  apellido2: string;
-  telefono: string
+  public usuario = {
+    nombre: "",
+    contrasena: "",
+    apellido1: "",
+    apellido2: "",
+    email: "",
+    telefono: ""
+  }
+  public confirmarContrasena = "";
 
-  constructor(private service: UsuarioService) {
-    this.email = "";
-    this.password = "";
-    this.confirmPassword = "";
-    this.nombre = "";
-    this.apellido1 = "";
-    this.apellido2 = "";
-    this.telefono = "";
+  constructor(private service: UsuarioService, private serviceCarrito: CarritoService) {
+
   }
   ngOnInit(): void {
   }
 
-  register() {
-    const usuario = {
-      nombre: this.nombre,
-      apellido1: this.apellido1,
-      apellido2: this.apellido2,
-      email: this.email,
-      telefono: this.telefono
+  registrar() {
+    if (this.usuario.nombre == "" || this.usuario.contrasena == "" || this.confirmarContrasena == "" || this.usuario.email == "" || this.usuario.telefono == "") {
+      alert("Rellene los campos obligatorios: \n- Nombre \n- Contraseña \n- Confirmar contraseña \n- Email  \n- Telefono");
+    }
+    else {
+      if (this.usuario.contrasena == this.confirmarContrasena) {
+        this.serviceCarrito.insertarCarrito().subscribe(data =>{
+        });
+        this.service.register(this.usuario).subscribe(data => {
+          alert(data.message);
+
+        });
+      }
+      else {
+        alert("Las contraseñas no coinciden");
+
+      }
+
     }
 
-    this.service.register(usuario).subscribe(data => {
-      this.service.setToken(data.token);
-    });
   }
+
 }

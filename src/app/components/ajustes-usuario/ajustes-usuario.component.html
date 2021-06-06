@@ -1,56 +1,62 @@
-<form>
-    <div class="row">
-        <div class="col">
+<h1 class="mt-3">Ajustes de usuario</h1>
+<hr>
+<div class="row mr-3">
+    <div class="col">
+        <div class="mb-3">
             <label class="form-label">Nombre</label>
             <input type="text" class="form-control" [(ngModel)]="usuario.nombre" name="nombre">
         </div>
-        <div class="col">
-            <label class="form-label">Password</label>
+        <div class="mb-3">
+            <label class="form-label">Contraseña</label>
             <input type="password" [(ngModel)]="usuario.contrasena" name="contrasena" class="form-control">
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col mb-3">
+        <div class="mb-3">
             <label class="form-label">Segundo apellido</label>
             <input type="text" class="form-control" [(ngModel)]="usuario.apellido2" name="apellido2">
         </div>
-        <div class="col mb-3">
+    </div>
+    <!-- Col 2 -->
+    <div class="col">
+        <div class="mb-3">
             <label class="form-label">Email</label>
             <input type="email" class="form-control" [(ngModel)]="usuario.email" name="email">
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col mb-3">
+        <div class="mb-3">
             <label class="form-label">Telefono</label>
             <input type="text" class="form-control" [(ngModel)]="usuario.telefono" name="telefono">
         </div>
-        <div class="col mb-3">
-            <div class="row">
-                <select class="form-select col" [(ngModel)]="direccionSelecionada" aria-label="Default select example"
+        <div class="mb-3">
+            <div class="row col w-100">
+                <label class="form-label">Direcciones</label>
+                <select class="form-select col w-100" [(ngModel)]="direccionSelecionada" aria-label="Default select example"
                     name="direccion">
-                    <option selected value="0">Direcciones</option>
-                    <option *ngFor="let direccion of direcciones" value="{{direccion.id}}">{{direccion.direccion}}
+                    <option *ngFor="let direccion of direcciones" value="{{direccion.id}}">
+                        {{direccion.direccion}}
                     </option>
                 </select>
+                <div class="col justify-content-center align-self-center">
+                    <a class="justify-content-center align-self-center mr-3 " data-bs-toggle="collapse"
+                        href="#nuevaDireccion" role="button" aria-expanded="false" aria-controls="collapseExample"><i
+                            class="fas fa-plus-circle" style="color:#4CAF50"></i></a>
+                    <a (click)="eliminarDireccion()" class="justify-content-center align-self-center"><i
+                            class="fas fa-trash" style="color:#4CAF50"></i></a>
+
+                </div>
+            </div>
+            <div class="collapse" id="nuevaDireccion">
+                <div class="row">
+                    <div class="col mb-3">
+                        <label class="form-label">Nueva Direccion</label>
+                        <input type="text" class="form-control" [(ngModel)]="nuevaDireccion" name="nuevaDireccion">
+                    </div>
+                </div>
                 <div class="col">
-                    <a (click)="eliminarDireccion()" class=""><i class="fas fa-trash" style="color:#4CAF50"></i></a>
-                    <a class="" data-bs-toggle="collapse" href="#nuevaDireccion" role="button" aria-expanded="false"
-                        aria-controls="collapseExample"><i class="fas fa-plus-circle" style="color:#4CAF50"></i></a>
+                    <button type="submit" class="btn bg-success row text-white" (click)="guardarDireccion()">Añadir
+                        Direccion</button>
                 </div>
             </div>
         </div>
-            <div class="col collapse" id="nuevaDireccion">
-                <div class="mb-3">
-                    <label class="form-label">Nueva Direccion</label>
-                    <input type="text" class="form-control" [(ngModel)]="nuevaDireccion" name="nuevaDireccion">
-                </div>
-                <button type="submit" class="btn bg-success" (click)="guardarDireccion()">Añadir
-                    Direccion</button>
-            </div>
-
-       
     </div>
-    <button type="submit" class="btn bg-success" (click)="guardar()">Guardar cambios</button>
-</form>
+
+</div>
+<button type="submit" class="btn bg-success text-white" (click)="guardar()">Guardar cambios</button>

@@ -1,10 +1,11 @@
-<h1>Carrito</h1>
+<div class="mx-4">
+<h1 class="mt-2">Carrito</h1>
 <hr>
-<h3>Productos</h3>
+<h2>Productos</h2>
 <div class="productos">
     <ul class="list-group my-4 mr-4">
         <li *ngFor="let producto of productosCarrito" class="list-group-item">
-            <h2>{{producto.nombre}}</h2>
+            <h3>{{producto.nombre}}</h3>
             <div class="row d-flex justify-content-start align-self-center">
                 <div class="col-3 justify-content-center align-self-center">
                     <img src={{producto.imagen}} class="w-100" />
@@ -19,21 +20,43 @@
                 </div>
                 <div class="col-1 d-flex justify-content-end align-self-center">
                     <a class="text-aling-center m-0 p-0" (click)="eliminarProducto(producto.carrito_id_producto)"><i
-                            class="fas fa-trash-alt fa-3x"></i></a>
+                            class="fas fa-trash-alt fa-3x" style="color:#4CAF50"></i></a>
                 </div>
             </div>
         </li>
     </ul>
 </div>
-<h3>Direccion</h3>
-<div class="direccion mb-3">
-    <div class="row">
-        <select class="form-select col" aria-label="Default select example" [(ngModel)]="idDireccion">
-            <option selected>Producto a modificar</option>
-            <option *ngFor="let direccion of direcciones" value="{{direccion.id}}">{{direccion.direccion}}</option>
+<h2 class="mb-3">Direccion</h2>
+<div class="mb-3">
+    <div class="row col w-100">
+        <select class="form-select col w-100" [(ngModel)]="idDireccion" aria-label="Default select example"
+            name="direccion">
+            <option *ngFor="let direccion of direcciones" value="{{direccion.id}}">
+                {{direccion.direccion}}
+            </option>
         </select>
-    </div>
-    <div id="emailHelp" class="form-text">Selecciona un direccion</div>
+        <div class="col justify-content-center align-self-center">
+            <a class="justify-content-center align-self-center mr-3 " data-bs-toggle="collapse"
+                href="#nuevaDireccion" role="button" aria-expanded="false" aria-controls="collapseExample"><i
+                    class="fas fa-plus-circle" style="color:#4CAF50"></i></a>
+            <a (click)="eliminarDireccion()" class="justify-content-center align-self-center"><i
+                    class="fas fa-trash" style="color:#4CAF50"></i></a>
 
+        </div>
+    </div>
+    <div class="collapse mt-3" id="nuevaDireccion">
+        <div class="row">
+            <div class="col mb-3">
+                <label class="form-label">Nueva Direccion</label>
+                <input type="text" class="form-control w-50" [(ngModel)]="nuevaDireccion" name="nuevaDireccion">
+            </div>
+        </div>
+        <div class="col">
+            <button type="submit" class="btn bg-success row text-white" (click)="guardarDireccion()">Añadir
+                Direccion</button>
+        </div>
+    </div>
 </div>
-<button class="btn bg-success" (click)="venta()">Realizar Compra</button>
+<hr>
+<button class="btn bg-success text-white" (click)="venta()">Realizar Compra</button>
+</div>

@@ -18,7 +18,7 @@ import { CarritoComponent } from './components/carrito/carrito.component';
 import { GestionProductosComponent } from './components/gestion-productos/gestion-productos.component';
 import { BusquedaComponent } from './components/busqueda/busqueda.component';
 import { AjustesUsuarioComponent } from './components/ajustes-usuario/ajustes-usuario.component';
-import { PiePaginaComponent } from './components/pie-pagina/pie-pagina.component';
+import { VentasComponent } from './components/ventas/ventas.component';
 
 
 @NgModule({
@@ -34,7 +34,7 @@ import { PiePaginaComponent } from './components/pie-pagina/pie-pagina.component
     GestionProductosComponent,
     BusquedaComponent,
     AjustesUsuarioComponent,
-    PiePaginaComponent,
+    VentasComponent,
   ],
   imports: [
     BrowserModule,
